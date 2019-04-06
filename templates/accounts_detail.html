@@ -1,0 +1,263 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="content">
+        <div class="animated fadeIn">
+            <div class="ui-typography">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>客户基本信息</h4>
+
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="row form-group">
+                                            <div class="col col-md-3">
+                                                <label class=" form-control-label">线索拥有者:</label>
+                                            </div>
+                                            <div class="col-12 col-md-9">
+                                                <p class="form-control-static">{{ account_obj.owner }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col col-md-3">
+                                                <label class=" form-control-label">公司名称:</label>
+                                            </div>
+                                            <div class="col-12 col-md-9">
+                                                <p class="form-control-static">{{ account_obj.company }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col col-md-3">
+                                                <label class=" form-control-label">电话:</label>
+                                            </div>
+                                            <div class="col-12 col-md-9">
+                                                <p class="form-control-static">{{ account_obj.phone }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col col-md-3">
+                                                <label class=" form-control-label">客户所在地:</label>
+                                            </div>
+                                            <div class="col-12 col-md-9">
+                                                <p class="form-control-static">{{ account_obj.site }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col col-md-3">
+                                                <label class=" form-control-label">网站:</label>
+                                            </div>
+                                            <div class="col-12 col-md-9">
+                                                <p class="form-control-static">{{ account_obj.website }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col col-md-3">
+                                                <label class=" form-control-label">客户类型:</label>
+                                            </div>
+                                            <div class="col-12 col-md-9">
+                                                <p class="form-control-static">{{ account_obj.get_account_type_display }}</p>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="row form-group">
+                                            <div class="col col-md-3"><label class=" form-control-label">行业：</label>
+                                            </div>
+                                            <div class="col-12 col-md-9">
+                                                <p class="form-control-static">{{ account_obj.industry }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col col-md-3"><label class=" form-control-label">员工数:</label>
+                                            </div>
+                                            <div class="col-12 col-md-9">
+                                                <p class="form-control-static">{{ account_obj.num }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col col-md-3"><label
+                                                    class=" form-control-label">年收入：</label>
+                                            </div>
+                                            <div class="col-12 col-md-9">
+                                                <p class="form-control-static">{{ account_obj.annual_revenue }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col col-md-3"><label
+                                                    class=" form-control-label">地址：</label>
+                                            </div>
+                                            <div class="col-12 col-md-9">
+                                                <p class="form-control-static">{{ account_obj.address }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col col-md-3">
+                                                <label class=" form-control-label">公司所有权:</label>
+                                            </div>
+                                            <div class="col-12 col-md-9">
+                                                <p class="form-control-static">{{ account_obj.get_owner_ship_display }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="box-title">商机</h4>
+                                <button class="btn btn-outline-secondary btn-sm"
+                                        style="position: absolute; right: 60px; top: 15px;"
+                                        data-toggle="modal" data-target="#staticModal"
+                                        type="button">
+                                    新建商机
+                                </button>
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">商机名称</th>
+                                        <th scope="col">预计成交日期</th>
+                                        <th scope="col">可能性</th>
+                                        <th scope="col">成交金额</th>
+                                        <th scope="col">阶段</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for obj in potentials_list %}
+                                        <tr>
+                                            <th scope="row">{{ forloop.counter }}</th>
+                                            <td><a href="{% url 'detail_potentials' obj.id %}">{{ obj.name }}</a></td>
+                                            <td>{{ obj.closing_date }}</td>
+                                            <td>{{ obj.probability }}</td>
+                                            <td>{{ obj.money }}</td>
+                                            <td>{{ obj.get_stage_display }}</td>
+                                        </tr>
+                                    {% endfor %}
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="modal fade" id="staticModal" tabindex="-1"
+                             role="dialog" aria-labelledby="staticModalLabel"
+                             style="display: none;">
+                            <div class="modal-dialog modal-lg" role="document">
+                                <form method="post" class="modal-content">{% csrf_token %}
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="staticModalLabel">新增商机</h5>
+                                        <button type="button" class="close" data-dismiss="modal"
+                                                aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row form-group">
+                                            {% for form in potentials_form %}
+                                                <div class="col col-md-3"><label
+                                                        class=" form-control-label">{{ form.label }}:</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <p class="form-control-static">{{ form }}</p>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">Cancel
+                                        </button>
+                                        <button type="submit" class="btn btn-primary">提交
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title box-title">任务</h4>
+                                <div class="card-content">
+                                    <div class="todo-list">
+                                        <div class="tdl-holder">
+                                            <div class="tdl-content">
+                                                <ul>{% for tasks_obj in tasks_obj_list %}
+                                                    <li>
+                                                        <label>
+                                                            <input type="checkbox"><i class="check-box"></i>
+                                                            <span>{{ tasks_obj.subject }}</span>
+                                                            <a href="#" class="fa fa-times"></a>
+                                                            <a href="{% url 'leads_tasks_edit' tasks_obj.id %}"
+                                                               class="fa fa-pencil"></a>
+                                                            <a href="#" class="fa fa-check"></a>
+                                                        </label>
+                                                    </li>
+                                                {% endfor %}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div> <!-- /.todo-list -->
+                                </div>
+                            </div> <!-- /.card-body -->
+                        </div><!-- /.card -->
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title box-title"> 通话</h4>
+                                <div class="card-content">
+                                    <div class="messenger-box">
+                                        <ul>
+                                            {% for call_obj in call_obj_list %}
+                                                <li>
+                                                    <div class="msg-received msg-container">
+                                                        <div class="avatar">
+                                                            <img src="{% static 'images/avatar/64-2.jpg' %}">
+                                                            <div class="send-time">2019-3-1 11:00</div>
+                                                        </div>
+                                                        <div class="msg-box">
+                                                            <div class="name">
+                                                                {{ call_obj.related_to.owner.username }}
+                                                            </div>
+                                                            <div class="alert alert-light"
+                                                                 role="alert">{{ call_obj.content }}
+                                                            </div>
+                                                        </div>
+                                                    </div><!-- /.msg-received -->
+                                                </li>
+                                            {% endfor %}
+                                        </ul>
+                                        <form class="send-mgs">
+                                            <div class="yourmsg">
+                                                <input class="form-control" name="call_record" type="text">
+                                            </div>
+                                            <button type="submit" class="btn msg-send-btn">
+                                                <i class="pe-7f-paper-plane"></i>
+                                            </button>
+                                        </form>
+                                    </div><!-- /.messenger-box -->
+                                </div>
+                            </div> <!-- /.card-body -->
+                        </div><!-- /.card -->
+                    </div>
+
+                </div>
+            </div>
+        </div><!-- .animated -->
+    </div>
+{% endblock %}

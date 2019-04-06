@@ -1,0 +1,7 @@
+<ul class="nav navbar-nav">
+    {% for item in request.session.menus %}
+        <li class="">
+            <a href="{{ item.url }}"> <i class="menu-icon fa {{ item.icon }}"></i>{{ item.title }}</a>
+        </li>
+    {% endfor %}
+</ul>

@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load tags %}
+
+{% block content %}
+    <div class="content">
+        <div class="animated fadeIn">
+            <div class="ui-typography">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>商机基本信息</h4>
+
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="row form-group">
+                                            <div class="col col-md-3">
+                                                <label class=" form-control-label">商机所有者:</label>
+                                            </div>
+                                            <div class="col-12 col-md-9">
+                                                <p class="form-control-static">{{ potential_obj.owner.username }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col col-md-3">
+                                                <label class=" form-control-label">商机名称:</label>
+                                            </div>
+                                            <div class="col-12 col-md-9">
+                                                <p class="form-control-static">{{ potential_obj.name }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col col-md-3">
+                                                <label class=" form-control-label">客户名称:</label>
+                                            </div>
+                                            <div class="col-12 col-md-9">
+                                                <p class="form-control-static">{{ potential_obj.account_name }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col col-md-3">
+                                                <label class=" form-control-label">下一步:</label>
+                                            </div>
+                                            <div class="col-12 col-md-9">
+                                                <p class="form-control-static">{{ potential_obj.next_step }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col col-md-3">
+                                                <label class=" form-control-label">线索来源:</label>
+                                            </div>
+                                            <div class="col-12 col-md-9">
+                                                <p class="form-control-static">{{ potential_obj.get_source_display }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col col-md-3">
+                                                <label class=" form-control-label">联系人名称:</label>
+                                            </div>
+                                            <div class="col-12 col-md-9">
+                                                <p class="form-control-static">{{ potential_obj.contact }}</p>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="row form-group">
+                                            <div class="col col-md-3"><label class=" form-control-label">金额：</label>
+                                            </div>
+                                            <div class="col-12 col-md-9">
+                                                <p class="form-control-static">{{ potential_obj.money }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col col-md-3"><label class=" form-control-label">预计成交日期:</label>
+                                            </div>
+                                            <div class="col-12 col-md-9">
+                                                <p class="form-control-static">{{ potential_obj.closing_date }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col col-md-3"><label
+                                                    class=" form-control-label">阶段：</label>
+                                            </div>
+                                            <div class="col-12 col-md-9">
+                                                <p class="form-control-static">{{ potential_obj.get_stage_display }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col col-md-3"><label
+                                                    class=" form-control-label">可能性：</label>
+                                            </div>
+                                            <div class="col-12 col-md-9">
+                                                <p class="form-control-static">{{ potential_obj.probability }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col col-md-3">
+                                                <label class=" form-control-label">创建者:</label>
+                                            </div>
+                                            <div class="col-12 col-md-9">
+                                                <p class="form-control-static">{{ potential_obj.owner }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="por-title">阶段</h4>
+                                <p class="muted">{{ potential_obj.get_stage_display }} ({{ potential_obj.stage }})</p>
+                                <div class="progress mb-2">
+                                    <div class="progress-bar {% get_stage_bg potential_obj %} progress-bar-striped progress-bar-animated"
+                                         role="progressbar" style="width: {{ potential_obj.stage }}" aria-valuenow="25" aria-valuemin="0"
+                                         aria-valuemax="100">{{ potential_obj.stage }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div><!-- .animated -->
+    </div>
+{% endblock %}

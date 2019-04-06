@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="content">
+        <div class="animated fadeIn">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong class="card-title">联系人</strong>
+                            <a href="{% url 'create_contacts' %}">
+                                <button type="button" class="btn btn-outline-success btn-sm" style="float: right;"><i
+                                        class="fa fa-plus"></i>&nbsp;
+                                    添加
+                                </button>
+                            </a>
+                        </div>
+                        <div class="card-body">
+                            <div class="col-sm-12 col-md-4" style="position: absolute; right: 20px;">
+                                <form class="input-group" action="">
+                                    <input type="text" id="input1-group2" name="query"
+                                           placeholder="......" class="form-control-sm form-control">
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-outline-secondary btn-sm">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                            <form action="" method="post">{% csrf_token %}
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-4">
+                                        <div class="row form-group">
+                                            <div class="col-12 col-md-5">
+                                                <select name="action" class="form-control-label">
+                                                    <option value="multi_del">删除</option>
+                                                </select>
+                                            </div>
+                                            <div class="col col-md-3">
+                                                <button type="submit"
+                                                        class="btn btn-outline-secondary btn-sm btn-block">
+                                                    Go
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th class="serial">#</th>
+                                        <th class="avatar">头像</th>
+                                        <th>联系人名称</th>
+                                        <th>客户名称</th>
+                                        <th>邮箱</th>
+                                        <th>电话</th>
+                                        <th>来源</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for contact in all_contacts %}
+                                        <tr>
+                                            <td class="serial">{{ forloop.counter }}.</td>
+                                            <td class="avatar">
+                                                <div class="round-img">
+                                                    <a href="#">
+                                                        <img class="rounded-circle"
+                                                             src="{% static 'images/avatar/1.jpg' %}">
+                                                    </a>
+                                                </div>
+                                            </td>
+                                            <td><a href="{% url 'detail_contacts' contact.id %}">{{ contact.name }}</a></td>
+                                            <td>{{ contact.account_name }}</td>
+                                            <td>{{ contact.email }}</td>
+                                            <td>{{ contact.cellphone }}</td>
+                                            <td>{{ contact.get_source_display }}</td>
+                                            <td><a href="{% url 'edit_contacts' contact.id %}"><i
+                                                    class="fa fa-edit"></i><span
+                                                    class="text-muted"></span></a></td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </form>
+                            <div class="row" style="margin-top: 30px;">
+                                <div class="col-sm-12 col-md-5">
+                                    <div class="dataTables_info" id="bootstrap-data-table_info" role="status"
+                                         aria-live="polite">Showing 1 to 10 of 57 entries
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-7">
+                                    <div class="dataTables_paginate paging_simple_numbers"
+                                         id="bootstrap-data-table_paginate">
+                                        <ul class="pagination">
+                                            {{ page_li }}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

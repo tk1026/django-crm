@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="content">
+        <div class="animated fadeIn">
+            <div class="row">
+                <div class="col-md-9 offset-md-1">
+
+                    <div class="card">
+                        <div class="card-header">
+                            <strong>创建线索</strong>
+                        </div>
+                        <div class="card-body card-block">
+                            <form action="#" method="post" enctype="multipart/form-data"
+                                  class="form-horizontal">{% csrf_token %}
+                                {% for form in form_obj %}
+                                    <div class="row form-group">
+                                        <div class="col col-md-3"><label
+                                                class=" form-control-label">{{ form.label }}</label></div>
+                                        <div class="col-12 col-md-9">
+                                            <p class="form-control-static">{{ form }}</p>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                                <div class="form-actions form-group">
+                                    <button type="submit" class="btn btn-success btn-sm">提交</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+
+
